@@ -55,17 +55,16 @@ void setup() {
   
   uint8_t index = 0;
   colorArray[index++] = YELLOW;
-  colorArray[index++] = GREEN;
+  colorArray[index++] = LAVENDER;
+  colorArray[index++] = SPRING;
   colorArray[index++] = ORANGE;
+  colorArray[index++] = GREEN;
+  colorArray[index++] = SEA_FOAM;
   colorArray[index++] = RED;
-  colorArray[index++] = PINK;
   colorArray[index++] = MAIZE;
   colorArray[index++] = MAGENTA;
   colorArray[index++] = BLUE;
-  colorArray[index++] = LAVENDER;
-  colorArray[index++] = SEA_FOAM;
-  colorArray[index++] = LAVENDER;
-  colorArray[index++] = SPRING;
+  colorArray[index++] = PINK;
   colorArray[index++] = SKY_BLUE;
   
   // rtc setup
@@ -81,14 +80,15 @@ void setup() {
     // following line sets the RTC to the date & time this sketch was compiled
     rtc.adjust(DateTime(__DATE__, __TIME__));
   }
-    rtc.adjust(DateTime(__DATE__, __TIME__));
+  rtc.adjust(DateTime(__DATE__, __TIME__));
 
   // initial colors:
   for (index = 0; index < 12; index++) {
-      ring.setPixelColor(index, colorArray[index]);
+      ring.setPixelColor(15 - index, colorArray[index]);
       ring.show();
       delay(50);
   }
+  delay(1000);
 }
 
 void loop() {
@@ -125,7 +125,7 @@ void setColor() {
 
    uint32_t seconds_since_full_hour = now.minute() * 60 + now.second();
    uint32_t minutesLeds = seconds_since_full_hour / SECONDS_PER_LED;
-   Serial.print("MinutesLeds: ");
+   Serial.print("Number of minute leds: ");
    Serial.println(minutesLeds, DEC);
    
    for (uint16_t index = 0; index < ring.numPixels(); index++) {
